@@ -2,7 +2,9 @@ FROM node:8.9.4
 
 WORKDIR /app
 
-EXPOSE 8080
+ENV PORT=80
+
+EXPOSE 80
 
 ADD index.js /app
 ADD package.json /app

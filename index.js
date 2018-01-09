@@ -1,12 +1,14 @@
 const aws = require('aws-sdk');
 const express = require('express');
 const os = require('os');
+const process = require('process');
 const uuid = require('uuid');
 
 const app = express();
 const documentClient = new aws.DynamoDB.DocumentClient();
 
 const TABLE_NAME = 'quotes';
+const DEFAULT_PORT = 8080;
 
 app.enable('trust proxy')
 app.use(express.json())
@@ -74,4 +76,4 @@ app.use(function(err, req, res, next) {
 process.on('SIGINT', () => process.exit(0));
 process.on('SIGTERM', () => process.exit(0));
 
-app.listen(8080);
+app.listen(process.env.PORT || DEFAULT_PORT);

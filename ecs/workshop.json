@@ -5,7 +5,7 @@
   "memory": "512",
   "networkMode": "awsvpc",
   "taskRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID_HERE:role/WorkshopAppRole",
-  "executionRoleArn": "arn:aws:iam::YOUR_ACCOUNT_IDHERE:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID_HERE:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
       "name": "workshop",

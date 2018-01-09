@@ -4,11 +4,14 @@ const os = require('os');
 const process = require('process');
 const uuid = require('uuid');
 
-const app = express();
-const documentClient = new aws.DynamoDB.DocumentClient();
-
 const TABLE_NAME = 'quotes';
 const DEFAULT_PORT = 8080;
+const DEFAULT_REGION = 'us-east-1';
+
+const app = express();
+const documentClient = new aws.DynamoDB.DocumentClient({
+  region: process.env.AWS_REGION || DEFAULT_REGION,
+});
 
 app.enable('trust proxy')
 app.use(express.json())

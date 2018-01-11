@@ -16,6 +16,11 @@ const documentClient = new aws.DynamoDB.DocumentClient({
 app.enable('trust proxy')
 app.use(express.json())
 
+app.use(function(req, res, next) {
+  console.log(`[${req.ip}] ${req.method} ${req.path}`);
+  next();
+});
+
 app.get('/quotes', function(req, res, next) {
   const params = {
     TableName: TABLE_NAME,
@@ -63,10 +68,18 @@ app.get('/', function(req, res, next) {
   res.json({Hostname: os.hostname()});
 });
 
-app.use(function(req, res, next) {
-  console.log(`[${req.ip}] ${req.method} ${req.path}`);
-  next();
-});
+//app.delete('/quote/:id', function(req, res, next) {
+//  const params  = {
+//    TableName: TABLE_NAME,
+//    Key: {
+//      ID: req.params.id,
+//    },
+// };
+
+//  documentClient.delete(params).promise()
+//    .then((data) => res.status(200).end())
+//    .catch(next);
+//});
 
 app.use(function(err, req, res, next) {
   console.log(err.stack);

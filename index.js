@@ -21,8 +21,6 @@ app.get('/quotes', function(req, res, next) {
     TableName: TABLE_NAME,
   };
 
-  console.log(`[${req.ip}] GET /quotes`);
-
   documentClient.scan(params).promise()
     .then((data) => res.json(data.Items))
     .catch(next);
@@ -43,8 +41,6 @@ app.put('/quotes', function(req, res, next) {
     },
   };
 
-  console.log(`[${req.ip}] PUT /quotes`);
-
   documentClient.put(params).promise()
     .then((data) => res.redirect(201, `/quotes/${id}`))
     .catch(next);
@@ -58,17 +54,18 @@ app.get('/quotes/:id', function(req, res, next) {
     },
   };
 
-  console.log(`[${req.ip}] GET /quotes/${req.params.id}`);
-
   documentClient.get(params).promise()
     .then((data) => data.Item ? res.json(data.Item) : res.status(404).end())
     .catch(next);
 });
 
 app.get('/', function(req, res, next) {
-  console.log(`[${req.ip}] GET /`);
-
   res.json({Hostname: os.hostname()});
+});
+
+app.use(function(req, res, next) {
+  console.log(`[${req.ip}] ${req.method} ${req.path}`);
+  next();
 });
 
 app.use(function(err, req, res, next) {

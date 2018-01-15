@@ -68,7 +68,7 @@ app.get('/', function(req, res, next) {
   res.json({Hostname: os.hostname()});
 });
 
-//app.delete('/quote/:id', function(req, res, next) {
+//app.delete('/quotes/:id', function(req, res, next) {
 //  const params  = {
 //    TableName: TABLE_NAME,
 //    Key: {

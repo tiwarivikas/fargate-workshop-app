@@ -16,7 +16,7 @@
         "awsvpcConfiguration": {
             "subnets": ["YOUR_SUBNET1_ID_HERE", "YOUR_SUBNET2_ID_HERE"],
             "securityGroups": ["YOUR_SECURITY_GROUP_ID_HERE"],
-            "assignPublicIp": "DISABLED"
+            "assignPublicIp": "ENABLED"
         }
     }
 }
